@@ -7,6 +7,11 @@ import express from "express";
 import router from "./routes/router.js";
 const app = express();
 
+// Authentication
+import session from "express-session";
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+
 // For view engine - EJS
 import path from "node:path";
 import { fileURLToPath } from "node:url";
