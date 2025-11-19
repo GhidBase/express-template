@@ -40,3 +40,10 @@
 -   **pg (PostgreSQL)**
 
     Using `Pool` from the `pg` library to query the database defined in `DATABASE_URL`.
+
+
+connect-pg-simple
+passport
+passport-local
+express-session
+bcryptjs
