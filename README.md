@@ -2,10 +2,20 @@
 
 ## How to use
 
--   **O**
-    -   step 1
-    -   step 2
-    -   step 3
+-   **Install**
+    -   In the command line run "npm install" to install the dependencies
+-   **Setup Environment**
+    -   Create a file named `.env` in the project root.
+    -   Add `PORT=3000` (or any port you prefer).
+    -   If using the database functionality, also add:  
+        `DATABASE_URL='your full database URL'`.
+-   **Run the server**
+-   In the command line, run `node app` to start the server.
+-   By default, the homepage will show: **"Template project loaded"**.
+-   You will also see a message in the browser console:  
+    **"this is a public file"** (demonstrating serving a public file used by an EJS template).
+
+---
 
 ## Features Included
 
