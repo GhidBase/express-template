@@ -15,6 +15,10 @@ const __dirname = path.dirname(__filename);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// creates a path to the public assets
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
+
 // To allow form inputs
 // Without this, form submissions would have
 // an empty req.body
