@@ -1,11 +1,16 @@
-EXPRESS TEMPLATE
+# EXPRESS TEMPLATE
 
-Things included in this template:
-MVC structure
-DOTENV
-DOTENV is used to set your PORT and your DATABASE_URL
-express
-express is set up to use ejs as it's view engine
-express is configured to use the /public directory as public assets
-pg (postgreSQL)
-The 'Pool' is being used from pg to actually query the database set up in DATABASE_URL
+## Features Included
+
+- **MVC structure**  
+  Organized into controllers, routes, views, and database modules.
+
+- **dotenv**  
+  Used to set your `PORT` and `DATABASE_URL` environment variables.
+
+- **Express**  
+  - Configured to use EJS as the view engine  
+  - Serves `/public` as the static assets directory
+
+- **pg (PostgreSQL)**  
+  Using `Pool` from the `pg` library to query the database defined in `DATABASE_URL`.
