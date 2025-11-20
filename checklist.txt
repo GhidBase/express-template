@@ -1,4 +1,0 @@
-- Database initializes the user table if there isn't one, and displays a message only when it just made it
-- Authentication is added
-- Password is encrypted with bcryptjs and stored in password_hash
-- salt is stored in the user file and used to read the account to check the password in the future

@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import db from "../db/authQueries.js";
+import bcrypt from "bcryptjs";
 
 // This strategy only runs if both username and password are
 // passed to it, else it doesn't run at all
@@ -15,7 +16,7 @@ passport.use(
                 return done(null, false, { message: "Incorrect username" });
             }
 
-            const match = await bcrypt.compare(password, user.password);
+            const match = await bcrypt.compare(password, user.password_hash);
             if (!match) {
                 console.log("incorrect password");
                 console.log(user.password_hash);
