@@ -7,10 +7,16 @@ import express from "express";
 import router from "./routes/router.js";
 const app = express();
 
+// Database automatic initialization
+import dbController from "./controllers/authController.js";
+dbController.initializeDatabase();
+
 // Authentication
 import session from "express-session";
 import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
+import "./config/passport.js";
+app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
+app.use(passport.session());
 
 // For view engine - EJS
 import path from "node:path";
@@ -19,6 +25,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
 
 // creates a path to the public assets
 const assetsPath = path.join(__dirname, "public");
