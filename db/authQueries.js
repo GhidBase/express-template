@@ -51,6 +51,34 @@ async function initializeMessages() {
         `);
 }
 
+async function initializeSessionTable() {
+    const check = await pool.query(`
+        SELECT EXISTS (
+            SELECT 1
+            FROM information_schema.tables
+            WHERE table_schema = 'public'
+                AND table_name = 'session'
+        );
+        `);
+
+    if (!check.rows[0].exists) {
+        console.log("users table doesn't exist, creating now");
+
+        const tableCreated = await pool.query(`
+        CREATE TABLE "session" (
+        "sid" varchar NOT NULL COLLATE "default",
+        "sess" json NOT NULL,
+        "expire" timestamp(6) NOT NULL
+        )
+        WITH (OIDS=FALSE);
+
+        ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+        CREATE INDEX "IDX_session_expire" ON "session" ("expire"); 
+        `);
+    }
+}
+
 async function checkUserExists(username) {
     const { rows } = await pool.query(
         `
@@ -103,8 +131,9 @@ async function getAllPosts() {
 export default {
     initializeUsers,
     initializeMessages,
+    initializeSessionTable,
     checkUserExists,
     addUser,
     getUser,
-    getUserById
+    getUserById,
 };

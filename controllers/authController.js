@@ -6,7 +6,11 @@ async function initializeDatabase(req, res) {
     // These functions automatically write a
     // console log to the server if they need
     // to make tables
-    Promise.all([db.initializeMessages(), db.initializeUsers()]);
+    Promise.all([
+        db.initializeMessages(),
+        db.initializeUsers(),
+        db.initializeSessionTable(),
+    ]);
 }
 
 async function addUser(req, res) {

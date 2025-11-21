@@ -13,9 +13,26 @@ dbController.initializeDatabase();
 
 // Authentication
 import session from "express-session";
+import pgSession from "connect-pg-simple";
+const PgStore = pgSession(session);
 import passport from "passport";
 import "./config/passport.js";
-app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
+import pool from "./db/pool.js";
+app.use(
+    session({
+        store: new PgStore({
+            pool,
+            tableName: "session", // optional
+        }),
+        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 30 * 24 * 60 * 60 * 1000,
+        },
+    })
+);
 app.use(passport.session());
 
 // For view engine - EJS
@@ -25,7 +42,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
 
 // creates a path to the public assets
 const assetsPath = path.join(__dirname, "public");
