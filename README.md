@@ -10,8 +10,18 @@
 
     -   Create a file named `.env` in the project root.
     -   Add `PORT=3000` (or any port you prefer).
-    -   If using the database functionality, also add:  
-        `DATABASE_URL='your full database URL'`.
+    -   To use the log-in functionality you'll need to
+        the session functionality too. Sessions require
+        a database to be connected.
+    -   To use the database functionality, add this to
+        the .env:  
+        `DATABASE_URL='your full database URL'` and
+        `SESSION_SECRET='a random string'`.
+    -   The SESSION_SECRET will be used to encrypt
+        passwords. Any people trying to access your
+        database and login will need to have the exact
+        same SESSION_SECRET as the one used originally
+
 
 -   **Run the server**
 
@@ -41,9 +51,6 @@
 
     Using `Pool` from the `pg` library to query the database defined in `DATABASE_URL`.
 
+-   **Authentication - Passport**
 
-connect-pg-simple
-passport
-passport-local
-express-session
-bcryptjs
+    Passport is used for authentication on this template. All the configuration is already done, when connecting a database all the necessary tables will automatically initialize. Sessions are stored on the database using connect-pg-simple, so logged in sessions will be remembered even if the node server is stopped. bcryptjs is used to encrypt all the passwords in the database so if the users table is ever leaked, no passwords will get out.
